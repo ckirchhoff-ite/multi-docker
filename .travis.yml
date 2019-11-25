@@ -4,18 +4,18 @@ services:
   - docker
 
 before_install:
-  - docker build -t testme/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t ckirchhoff1/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true testme/react-test npm test -- --coverage
+  - docker run -e CI=true ckirchhoff1/react-test npm test -- --coverage
 
 after_success:
-  - docker build -t testme/multi-client ./client
-  - docker build -t testme/multi-nginx ./nginx
-  - docker build -t testme/multi-server ./server
-  - docker build -t testme/multi-worker ./worker
+  - docker build -t ckirchhoff1/multi-client ./client
+  - docker build -t ckirchhoff1/multi-nginx ./nginx
+  - docker build -t ckirchhoff1/multi-server ./server
+  - docker build -t ckirchhoff1/multi-worker ./worker
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  - docker push testme/multi-client
-  - docker push testme/multi-nginx
-  - docker push testme/multi-server
-  - docker push testme/multi-worker
+  - docker push ckirchhoff1/multi-client
+  - docker push ckirchhoff1/multi-nginx
+  - docker push ckirchhoff1/multi-server
+  - docker push ckirchhoff1/multi-worker
